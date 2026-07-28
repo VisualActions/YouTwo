@@ -130,9 +130,16 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGN_ENTITLEMENTS="" \
             EXPANDED_CODE_SIGN_IDENTITY="" \
-            build 2>&1 | tee xcodebuild.log | grep -vE "^\s*(note|warning):" || {
-              echo "::group::last 200 lines of xcodebuild output"
-              tail -200 xcodebuild.log
+            ENABLE_USER_SCRIPT_SANDBOXING=NO \
+            build 2>&1 | tee xcodebuild.log | grep -vE "^\s*(note|warning|export |    cd )" || {
+              # The tail of an xcodebuild log is almost entirely note: spam, so
+              # pull out the lines that actually explain the failure.
+              echo "::group::errors"
+              grep -nE "error:|Sandbox: |BUILD FAILED|Command .* failed|failed with a nonzero exit code" xcodebuild.log | tail -60 || true
+              echo "::endgroup::"
+              echo "::group::failing script phase output"
+              grep -n "PhaseScriptExecution" xcodebuild.log | tail -5 || true
+              awk '/PhaseScriptExecution.*ExpoModulesJSI/,0' xcodebuild.log | head -80 || true
               echo "::endgroup::"
               exit 1
             }
