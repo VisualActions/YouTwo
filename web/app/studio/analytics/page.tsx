@@ -11,21 +11,19 @@ export default async function AnalyticsPage() {
   } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const since = new Date(Date.now() - 27 * 86400_000);
-  since.setHours(0, 0, 0, 0);
+  const DAYS = 28;
 
-  const [{ data: channel }, { data: vids }, { data: viewRows }] = await Promise.all([
+  // channel_daily_views aggregates in Postgres and returns one row per day.
+  // The old query pulled every view row over the wire and bucketed them in JS,
+  // which transferred N rows to render 28 bars.
+  const [{ data: channel }, { data: vids }, { data: dailyRows }] = await Promise.all([
     supabase.from("channels").select("*").eq("id", user.id).single(),
     supabase
       .from("videos")
       .select("*")
       .eq("channel_id", user.id)
       .order("view_count", { ascending: false }),
-    supabase
-      .from("video_views")
-      .select("viewed_at, videos!inner(channel_id)")
-      .eq("videos.channel_id", user.id)
-      .gte("viewed_at", since.toISOString()),
+    supabase.rpc("channel_daily_views", { days: DAYS }),
   ]);
 
   const c = channel as Channel;
@@ -33,21 +31,14 @@ export default async function AnalyticsPage() {
   const totalViews = videos.reduce((s, v) => s + v.view_count, 0);
   const totalLikes = videos.reduce((s, v) => s + v.like_count, 0);
 
-  // views per day, last 28 days
-  const days: { label: string; count: number }[] = [];
-  for (let i = 0; i < 28; i++) {
-    const d = new Date(since.getTime() + i * 86400_000);
-    days.push({
-      label: d.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
-      count: 0,
-    });
-  }
-  for (const row of viewRows ?? []) {
-    const idx = Math.floor(
-      (new Date(row.viewed_at).getTime() - since.getTime()) / 86400_000
-    );
-    if (idx >= 0 && idx < 28) days[idx].count++;
-  }
+  // The RPC already returns one row per day, zero-filled, oldest first.
+  const days = ((dailyRows ?? []) as { day: string; views: number }[]).map((r) => ({
+    label: new Date(`${r.day}T00:00:00`).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    }),
+    count: Number(r.views),
+  }));
   const max = Math.max(1, ...days.map((d) => d.count));
 
   return (
@@ -85,8 +76,8 @@ export default async function AnalyticsPage() {
           ))}
         </div>
         <div className="mt-2 flex justify-between text-xs text-yt-sub">
-          <span>{days[0].label}</span>
-          <span>{days[27].label}</span>
+          <span>{days[0]?.label ?? ""}</span>
+          <span>{days[days.length - 1]?.label ?? ""}</span>
         </div>
       </div>
 
