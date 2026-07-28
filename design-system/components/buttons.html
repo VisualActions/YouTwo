@@ -1,0 +1,47 @@
+<!-- @dsCard group="Components" -->
+<style>
+  body { margin: 0; background: #0f0f0f; color: #f1f1f1; font-family: Roboto, "Segoe UI", Arial, sans-serif; padding: 24px; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .cap { width: 100%; font-size: 12px; color: #aaaaaa; margin-bottom: -6px; }
+  button { font-family: inherit; font-size: 14px; font-weight: 500; border: none; cursor: pointer; height: 36px; border-radius: 18px; padding: 0 16px; }
+  .primary { background: #f1f1f1; color: #0f0f0f; }
+  .secondary { background: #272727; color: #f1f1f1; }
+  .blue { background: #3ea6ff; color: #0f0f0f; }
+  .danger { background: #dc2626; color: #fff; }
+  .ghost-danger { background: #272727; color: #f87171; }
+  .outline-blue { background: transparent; color: #3ea6ff; border: 1px solid #303030; }
+  .icon { width: 40px; height: 40px; border-radius: 50%; background: transparent; color: #f1f1f1; display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+  .icon:hover, .secondary:hover { background: #3f3f3f; }
+  .seg { display: inline-flex; height: 36px; border-radius: 18px; background: #272727; overflow: hidden; align-items: center; }
+  .seg button { border-radius: 0; background: none; color: #f1f1f1; display: flex; gap: 8px; align-items: center; }
+  .seg .div { width: 1px; height: 20px; background: #303030; }
+  svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+</style>
+<div class="cap">Primary / secondary / accent</div>
+<div class="row">
+  <button class="primary">Save</button>
+  <button class="secondary">Cancel</button>
+  <button class="blue">Sign in</button>
+  <button class="outline-blue">Sign in</button>
+  <button class="danger">Confirm delete</button>
+  <button class="ghost-danger">Delete video</button>
+</div>
+<div class="cap">Subscribe states</div>
+<div class="row">
+  <button class="primary">Subscribe</button>
+  <button class="secondary">Subscribed</button>
+</div>
+<div class="cap">Like / dislike segmented pill</div>
+<div class="row">
+  <span class="seg">
+    <button><svg viewBox="0 0 24 24"><path d="M7 10v12M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>1.2K</button>
+    <span class="div"></span>
+    <button><svg viewBox="0 0 24 24" style="transform:rotate(180deg)"><path d="M7 10v12M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>24</button>
+  </span>
+</div>
+<div class="cap">Icon buttons (topbar)</div>
+<div class="row">
+  <button class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.34-4.34"/></svg></button>
+  <button class="icon"><svg viewBox="0 0 24 24"><path d="M12 3v12m0-12 4 4m-4-4L8 7"/><path d="M2 17v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2"/></svg></button>
+  <button class="icon"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></button>
+</div>

@@ -1,0 +1,31 @@
+<!-- @dsCard group="Components" -->
+<style>
+  body { margin: 0; background: #0f0f0f; color: #f1f1f1; font-family: Roboto, "Segoe UI", Arial, sans-serif; padding: 24px; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; }
+  .cap { width: 100%; font-size: 12px; color: #aaaaaa; margin-bottom: -8px; }
+  .live { background: #ff0033; color: #fff; font-size: 11px; font-weight: 600; text-transform: uppercase; border-radius: 4px; padding: 2px 6px; }
+  .duration { background: rgba(0,0,0,.8); color: #fff; font-size: 12px; font-weight: 500; border-radius: 4px; padding: 2px 4px; }
+  .pill { border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 500; }
+  .ready { background: rgba(34,197,94,.15); color: #4ade80; }
+  .processing { background: rgba(234,179,8,.15); color: #facc15; }
+  .failed { background: rgba(239,68,68,.15); color: #f87171; }
+  .verify-on { background: rgba(62,166,255,.15); color: #3ea6ff; border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 500; display: inline-flex; gap: 6px; align-items: center; }
+  .verify-off { background: #272727; color: #aaaaaa; border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 500; display: inline-flex; gap: 6px; align-items: center; }
+  .name { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 500; }
+  .check { width: 15px; height: 15px; fill: #aaaaaa; }
+  .reddot { width: 6px; height: 6px; border-radius: 50%; background: #ff0033; display: inline-block; }
+  .tag { color: #3ea6ff; font-size: 14px; }
+</style>
+<div class="cap">Live + duration badges (overlay on thumbnails)</div>
+<div class="row"><span class="live">Live</span><span class="duration">12:34</span><span class="duration">1:10:07</span></div>
+<div class="cap">Video status pills (Studio)</div>
+<div class="row"><span class="pill ready">ready</span><span class="pill processing">processing</span><span class="pill failed">failed</span></div>
+<div class="cap">Verified checkmark — gray badge-check after channel names; sidebar live dot</div>
+<div class="row">
+  <span class="name">YoStudios <svg class="check" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" fill="#aaaaaa"/><path d="m9 12 2 2 4-4" fill="none" stroke="#0f0f0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  <span class="name">Channel live <span class="reddot"></span></span>
+</div>
+<div class="cap">Admin verify toggle</div>
+<div class="row"><span class="verify-on">✔ Verified</span><span class="verify-off">✔ Verify</span></div>
+<div class="cap">Hashtags (description)</div>
+<div class="row"><span class="tag">#gaming</span><span class="tag">#tutorial</span><span class="tag">#devlog</span></div>

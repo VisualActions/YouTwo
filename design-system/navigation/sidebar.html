@@ -1,0 +1,29 @@
+<!-- @dsCard group="Navigation" -->
+<style>
+  body { margin: 0; background: #0f0f0f; color: #f1f1f1; font-family: Roboto, "Segoe UI", Arial, sans-serif; padding: 16px; }
+  .sidebar { width: 240px; }
+  .item { display: flex; align-items: center; gap: 20px; padding: 8px 12px; border-radius: 8px; font-size: 14px; }
+  .item:hover { background: #272727; }
+  .item.active { background: #272727; font-weight: 500; }
+  hr { border: none; border-top: 1px solid #303030; margin: 12px 0; }
+  h3 { font-size: 16px; font-weight: 500; margin: 0 0 4px; padding: 0 12px; }
+  .sub { display: flex; align-items: center; gap: 16px; padding: 8px 12px; border-radius: 8px; font-size: 14px; }
+  .sub:hover { background: #272727; }
+  .mini { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; }
+  .dot { margin-left: auto; width: 6px; height: 6px; border-radius: 50%; background: #ff0033; }
+  svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; flex-shrink: 0; }
+  .check { width: 13px; height: 13px; fill: #aaaaaa; stroke: none; }
+</style>
+<div class="sidebar">
+  <div class="item active"><svg viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .7-1.5l7-6a2 2 0 0 1 2.6 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</div>
+  <div class="item"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><circle cx="12" cy="14" r="3"/></svg>Your channel</div>
+  <div class="item"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m10 9 5 3-5 3z"/></svg>Studio</div>
+  <div class="item"><svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Admin</div>
+  <hr />
+  <h3>Subscriptions</h3>
+  <div class="sub"><span class="mini" style="background:#e91e63">D</span>Dev Channel<span class="dot" title="Live"></span></div>
+  <div class="sub"><span class="mini" style="background:#009688">K</span>KitCat
+    <svg class="check" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/></svg>
+  </div>
+  <div class="sub"><span class="mini" style="background:#3f51b5">S</span>Seqyr</div>
+</div>

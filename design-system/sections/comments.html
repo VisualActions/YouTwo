@@ -1,0 +1,43 @@
+<!-- @dsCard group="Sections" -->
+<style>
+  body { margin: 0; background: #0f0f0f; color: #f1f1f1; font-family: Roboto, "Segoe UI", Arial, sans-serif; padding: 24px; max-width: 640px; }
+  h2 { font-size: 18px; font-weight: 700; margin: 0 0 16px; }
+  .input { border: none; border-bottom: 1px solid #303030; background: transparent; color: #f1f1f1; width: 100%; padding: 0 0 8px; font-size: 14px; outline: none; font-family: inherit; }
+  .input:focus { border-bottom-color: #f1f1f1; }
+  .comment { display: flex; gap: 12px; margin-top: 24px; }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 500; }
+  .who { font-size: 13px; font-weight: 500; }
+  .when { font-size: 12px; color: #aaaaaa; margin-left: 6px; font-weight: 400; }
+  .body { font-size: 14px; margin: 4px 0; }
+  .actions { font-size: 12px; font-weight: 500; color: #aaaaaa; display: flex; gap: 12px; }
+  .actions span:hover { color: #f1f1f1; cursor: pointer; }
+  .replies { border-left: 2px solid #303030; padding-left: 16px; margin-top: 12px; }
+</style>
+<h2>42 Comments</h2>
+<input class="input" placeholder="Add a comment..." />
+<div class="comment">
+  <div class="avatar" style="background:#e91e63">D</div>
+  <div style="flex:1">
+    <div class="who">@devchannel<span class="when">2 hours ago</span></div>
+    <p class="body">This is exactly what I needed, the HLS part especially. Subscribed.</p>
+    <div class="actions"><span>Reply</span></div>
+    <div class="replies">
+      <div class="comment" style="margin-top:0">
+        <div class="avatar" style="width:32px;height:32px;background:#7c4dff">Y</div>
+        <div>
+          <div class="who">@yostudios<span class="when">1 hour ago</span></div>
+          <p class="body">Thanks! Full writeup coming next week.</p>
+          <div class="actions"><span>Reply</span><span style="color:#f87171">Delete</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="comment">
+  <div class="avatar" style="background:#009688">K</div>
+  <div>
+    <div class="who">@kitcat<span class="when">1 day ago</span></div>
+    <p class="body">first!</p>
+    <div class="actions"><span>Reply</span></div>
+  </div>
+</div>

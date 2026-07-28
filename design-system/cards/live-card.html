@@ -1,0 +1,41 @@
+<!-- @dsCard group="Cards" -->
+<style>
+  body { margin: 0; background: #0f0f0f; color: #f1f1f1; font-family: Roboto, "Segoe UI", Arial, sans-serif; padding: 24px; }
+  .wrap { display: flex; flex-direction: column; gap: 16px; max-width: 720px; }
+  .live-card { display: flex; align-items: center; gap: 12px; background: #212121; border-radius: 12px; padding: 12px; }
+  .live-card:hover { background: #272727; }
+  .avatar { width: 48px; height: 48px; border-radius: 50%; background: #5e35b1; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 20px; flex-shrink: 0; }
+  .name { font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .sub { font-size: 13px; color: #aaaaaa; }
+  .live { margin-left: auto; background: #ff0033; color: #fff; font-size: 11px; font-weight: 600; text-transform: uppercase; border-radius: 4px; padding: 2px 6px; }
+  .check { width: 14px; height: 14px; fill: #aaaaaa; }
+  .row-card { display: flex; gap: 8px; max-width: 400px; }
+  .row-thumb { position: relative; width: 168px; aspect-ratio: 16/9; border-radius: 8px; background: linear-gradient(135deg, #2a2a2a, #151515); flex-shrink: 0; }
+  .row-thumb .duration { position: absolute; bottom: 4px; right: 4px; background: rgba(0,0,0,.8); font-size: 11px; border-radius: 4px; padding: 1px 4px; }
+  .row-title { font-size: 14px; font-weight: 500; line-height: 20px; margin: 0 0 4px; }
+  .row-sub { font-size: 12px; color: #aaaaaa; }
+</style>
+<div class="wrap">
+  <div>
+    <div style="font-size:12px;color:#aaaaaa;margin-bottom:8px;">Live channel card (home "Live now" row + channel Live tab)</div>
+    <div class="live-card">
+      <div class="avatar">Y</div>
+      <div>
+        <div class="name">YoStudios <svg class="check" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4" fill="none" stroke="#0f0f0f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="sub">Friday dev stream — building the app</div>
+      </div>
+      <span class="live">Live</span>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:12px;color:#aaaaaa;margin-bottom:8px;">Compact recommended row (watch page right column)</div>
+    <div class="row-card">
+      <div class="row-thumb"><span class="duration">8:41</span></div>
+      <div>
+        <h4 class="row-title">Recommended video title clamps to two lines here</h4>
+        <div class="row-sub">Dev Channel</div>
+        <div class="row-sub">45K views · 2 weeks ago</div>
+      </div>
+    </div>
+  </div>
+</div>

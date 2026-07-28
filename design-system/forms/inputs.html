@@ -1,0 +1,31 @@
+<!-- @dsCard group="Forms" -->
+<style>
+  body { margin: 0; background: #0f0f0f; color: #f1f1f1; font-family: Roboto, "Segoe UI", Arial, sans-serif; padding: 24px; max-width: 480px; }
+  label { display: block; font-size: 14px; font-weight: 500; margin: 20px 0 4px; }
+  label:first-child { margin-top: 0; }
+  .hint { font-size: 12px; color: #aaaaaa; margin: 2px 0 6px; }
+  input, textarea, select { width: 100%; box-sizing: border-box; background: #121212; border: 1px solid #303030; border-radius: 8px; color: #f1f1f1; padding: 12px; font-size: 14px; outline: none; font-family: inherit; }
+  input:focus, textarea:focus, select:focus { border-color: #3ea6ff; }
+  .prefix { display: flex; }
+  .prefix span { display: flex; align-items: center; background: #272727; border: 1px solid #303030; border-right: none; border-radius: 8px 0 0 8px; padding: 0 12px; color: #aaaaaa; }
+  .prefix input { border-radius: 0 8px 8px 0; }
+  .drop { border: 2px dashed #303030; border-radius: 12px; padding: 48px 24px; text-align: center; color: #aaaaaa; font-size: 14px; }
+  .drop:hover { border-color: #aaaaaa; }
+  .err { color: #f87171; font-size: 13px; margin-top: 6px; }
+  .ok { color: #4ade80; font-size: 13px; margin-top: 6px; }
+</style>
+<label>Title</label>
+<input value="My new upload" />
+<label>Handle</label>
+<div class="prefix"><span>@</span><input value="yostudios" /></div>
+<label>Description</label>
+<textarea rows="3" placeholder="Tell viewers about your video"></textarea>
+<label>Tags</label>
+<input placeholder="gaming, tutorial, music" />
+<div class="hint">Comma-separated. Used for search and recommendations.</div>
+<label>Visibility</label>
+<select><option>Public</option><option>Unlisted</option><option>Private</option></select>
+<label>Upload dropzone</label>
+<div class="drop">▶ Click to choose a video file</div>
+<div class="err">That handle is already taken.</div>
+<div class="ok">Saved.</div>

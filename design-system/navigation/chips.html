@@ -1,0 +1,29 @@
+<!-- @dsCard group="Navigation" -->
+<style>
+  body { margin: 0; background: #0f0f0f; color: #f1f1f1; font-family: Roboto, "Segoe UI", Arial, sans-serif; padding: 24px; }
+  .chips { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+  .chip { background: #272727; border-radius: 8px; padding: 6px 12px; font-size: 14px; font-weight: 500; cursor: pointer; }
+  .chip:hover { background: #3f3f3f; }
+  .chip.active { background: #f1f1f1; color: #0f0f0f; }
+  .tabs { display: flex; gap: 24px; border-bottom: 1px solid #303030; }
+  .tab { padding-bottom: 8px; font-size: 16px; font-weight: 500; color: #aaaaaa; border-bottom: 2px solid transparent; cursor: pointer; }
+  .tab.active { color: #f1f1f1; border-bottom-color: #f1f1f1; }
+  .tab:hover { color: #f1f1f1; }
+  .cap { font-size: 12px; color: #aaaaaa; margin-bottom: 10px; }
+</style>
+<div class="cap">Filter chips (home)</div>
+<div class="chips">
+  <span class="chip active">All</span>
+  <span class="chip">Gaming</span>
+  <span class="chip">Music</span>
+  <span class="chip">Live</span>
+  <span class="chip">Tutorials</span>
+  <span class="chip">Recently uploaded</span>
+</div>
+<div class="cap">Channel tabs</div>
+<div class="tabs">
+  <span class="tab active">Videos</span>
+  <span class="tab">Live</span>
+  <span class="tab">Playlists</span>
+  <span class="tab">About</span>
+</div>

@@ -1,0 +1,28 @@
+{
+  "projectId": "6a2dd1bd-27f9-4c31-8fb6-a5caaf1d6c6d",
+  "shape": "package",
+  "pkg": "@youtwo/ui-kit",
+  "globalName": "YouTwoUI",
+  "buildCmd": "npm run build",
+  "srcDir": "src",
+  "tsconfig": "tsconfig.json",
+  "cssEntry": "dist/styles.css",
+  "tokensGlob": "dist/tokens.css",
+  "readmeHeader": ".design-sync/conventions.md",
+  "docsDir": "docs/components",
+  "guidelinesGlob": ["docs/guides/**/*.md"],
+  "overrides": {
+    "FilterChips": { "cardMode": "column" },
+    "EmptyState": { "cardMode": "column" },
+    "StatGrid": { "cardMode": "column" },
+    "VideoGrid": { "cardMode": "column" },
+    "ChannelHeader": { "cardMode": "column" },
+    "ChannelListItem": { "cardMode": "column" },
+    "CommentItem": { "cardMode": "column" },
+    "LiveChat": { "cardMode": "column" },
+    "ContentTable": { "cardMode": "column" },
+    "LiveChannelCard": { "cardMode": "column" },
+    "RecommendedItem": { "cardMode": "column" },
+    "VideoRow": { "cardMode": "column" }
+  }
+}
