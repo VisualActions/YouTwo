@@ -101,24 +101,31 @@ nms.on("prePublish", async (id, streamPath) => {
     `${channel.id}-${Date.now()}.ts`
   );
 
-  // one ffmpeg: transcode to HLS for viewers + keep a mpegts copy as recording
+  // One ffmpeg, two outputs, and NO re-encoding on either.
+  //
+  // OBS has already encoded H.264/AAC before the stream reaches us, so we
+  // remux straight into HLS instead of decoding and re-encoding. That drops
+  // CPU from "saturates a core" to near zero, which is what makes live
+  // streaming viable on a 1 vCPU box. The trade-off is that viewers get
+  // whatever resolution/bitrate the broadcaster sent — there is no server-side
+  // rendition ladder — which is the right call for a self-hosted instance.
+  //
+  // Segment boundaries can only land on keyframes, so the effective segment
+  // length is driven by the encoder's keyframe interval. Set OBS to a 2 second
+  // keyframe interval to match -hls_time.
   const args = [
     "-loglevel", "error",
     "-i", `rtmp://127.0.0.1:${RTMP_PORT}${streamPath}`,
-    // live HLS rendition (720p)
+    // live HLS, remuxed
     "-map", "0:v:0", "-map", "0:a:0?",
-    "-c:v", "libx264", "-preset", "veryfast", "-tune", "zerolatency",
-    "-vf", "scale=-2:720",
-    "-b:v", "2800k", "-maxrate", "3000k", "-bufsize", "4200k",
-    "-g", "60", "-sc_threshold", "0",
-    "-c:a", "aac", "-b:a", "128k", "-ar", "48000",
+    "-c", "copy",
     "-f", "hls",
     "-hls_time", "2",
     "-hls_list_size", "6",
     "-hls_flags", "delete_segments+independent_segments",
     "-hls_segment_filename", `${outFwd}/seg_%05d.ts`,
     `${outFwd}/index.m3u8`,
-    // recording (stream copy, remuxed to mpegts)
+    // recording, also remuxed
     "-map", "0:v:0", "-map", "0:a:0?",
     "-c", "copy",
     "-f", "mpegts",

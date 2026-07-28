@@ -2,11 +2,27 @@ import ffmpeg from "fluent-ffmpeg";
 import fs from "node:fs";
 import path from "node:path";
 
-export const RENDITIONS = [
+const ALL_RENDITIONS = [
   { name: "1080p", height: 1080, vBitrate: "5000k", maxrate: "5350k", bufsize: "7500k", aBitrate: "192k" },
   { name: "720p", height: 720, vBitrate: "2800k", maxrate: "2996k", bufsize: "4200k", aBitrate: "128k" },
   { name: "480p", height: 480, vBitrate: "1400k", maxrate: "1498k", bufsize: "2100k", aBitrate: "96k" },
 ];
+
+// Every rendition is encoded in the same ffmpeg pass, so each one costs CPU.
+// On a small single-core box, set HLS_RENDITIONS=720p,480p (or just 720p) to
+// keep transcode times sane. Defaults to the full ladder.
+const wanted = (process.env.HLS_RENDITIONS || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+export const RENDITIONS = wanted.length
+  ? ALL_RENDITIONS.filter((r) => wanted.includes(r.name))
+  : ALL_RENDITIONS;
+
+if (RENDITIONS.length === 0) {
+  throw new Error(`HLS_RENDITIONS matched no known rendition (valid: ${ALL_RENDITIONS.map((r) => r.name).join(", ")})`);
+}
 
 export function probe(file) {
   return new Promise((resolve, reject) => {
