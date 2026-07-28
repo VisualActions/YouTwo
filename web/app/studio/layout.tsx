@@ -28,10 +28,12 @@ export default async function StudioLayout({
     <>
       <Topbar />
       <aside className="fixed bottom-0 left-0 top-14 z-40 hidden w-60 overflow-y-auto border-r border-yt-border px-3 pb-6 pt-4 lg:block">
-        <Link href="/studio" className="mb-3 flex items-center gap-2 px-3">
+        {/* Brand renders its own <a>, so this wrapper must not be a Link —
+            nesting anchors is invalid HTML and breaks hydration. */}
+        <div className="mb-3 flex items-center gap-2 px-3">
           <Brand label="YouTwo" href="/studio" />
           <span className="text-sm font-medium text-yt-sub">Studio</span>
-        </Link>
+        </div>
         <nav className="flex flex-col gap-1">
           <StudioLink href="/studio" icon={<LayoutDashboard className="h-5 w-5" />} label="Dashboard" />
           <StudioLink href="/studio/content" icon={<Video className="h-5 w-5" />} label="Content" />
