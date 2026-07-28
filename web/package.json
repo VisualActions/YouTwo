@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm --prefix ../design-kit ci --no-audit --no-fund && npm --prefix ../design-kit run build && next build",
+    "build": "cd ../design-kit && npm ci --include=dev --no-audit --no-fund && npm run build && cd ../web && next build",
     "start": "next start",
     "lint": "next lint"
   },

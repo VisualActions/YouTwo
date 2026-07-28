@@ -33,3 +33,5 @@ youtube-clone-html-css/
 *.pem
 *.p12
 *.mobileprovision
+
+.vercel
