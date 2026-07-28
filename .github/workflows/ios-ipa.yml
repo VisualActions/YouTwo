@@ -90,6 +90,27 @@ jobs:
           echo "scheme=$SCHEME" >> "$GITHUB_OUTPUT"
           echo "Building scheme '$SCHEME' from '$WORKSPACE'"
 
+      # Expo 57 / RN 0.86 pull some dependencies through Swift Package Manager.
+      # Resolving them in their own step gives a readable error when it fails
+      # and a writable cache dir, instead of a bare "Could not resolve package
+      # dependencies" in the middle of the build.
+      - name: Resolve Swift packages
+        run: |
+          for attempt in 1 2 3; do
+            echo "resolve attempt $attempt"
+            if xcodebuild -resolvePackageDependencies \
+                 -workspace "${{ steps.xc.outputs.workspace }}" \
+                 -scheme "${{ steps.xc.outputs.scheme }}" \
+                 -clonedSourcePackagesDirPath spm-cache \
+                 -disableAutomaticPackageResolution NO; then
+              echo "resolved"
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "::error::Swift package resolution failed after 3 attempts"
+          exit 1
+
       # Code signing is disabled outright — that is what makes this build
       # possible without an Apple Developer account.
       - name: Build (unsigned archive)
@@ -101,23 +122,29 @@ jobs:
             -configuration Release \
             -sdk iphoneos \
             -derivedDataPath build \
+            -clonedSourcePackagesDirPath spm-cache \
+            -skipPackagePluginValidation \
+            -skipMacroValidation \
             ONLY_ACTIVE_ARCH=NO \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGN_ENTITLEMENTS="" \
             EXPANDED_CODE_SIGN_IDENTITY="" \
-            build | xcbeautify || xcodebuild \
-            -workspace "${{ steps.xc.outputs.workspace }}" \
-            -scheme "${{ steps.xc.outputs.scheme }}" \
-            -configuration Release \
-            -sdk iphoneos \
-            -derivedDataPath build \
-            ONLY_ACTIVE_ARCH=NO \
-            CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGN_IDENTITY="" \
-            build
+            build 2>&1 | tee xcodebuild.log | grep -vE "^\s*(note|warning):" || {
+              echo "::group::last 200 lines of xcodebuild output"
+              tail -200 xcodebuild.log
+              echo "::endgroup::"
+              exit 1
+            }
+
+      - name: Upload build log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcodebuild-log
+          path: mobile/xcodebuild.log
+          if-no-files-found: ignore
 
       # An .ipa is just a zip with the .app inside a Payload/ directory.
       - name: Package IPA
