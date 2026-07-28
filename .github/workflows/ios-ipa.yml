@@ -4,15 +4,15 @@ name: Build iOS IPA (unsigned)
 # No Apple Developer account or secrets are required — sign it on your own
 # machine with AltStore / Sideloadly, or install with TrollStore.
 
+# Manual trigger only.
+#
+# macOS runners bill at a 10x multiplier against free Actions minutes, and this
+# build currently fails inside Expo's "[CP-User] Build ExpoModulesJSI
+# xcframework" script phase — a nested xcodebuild that cannot resolve Swift
+# packages. That failure is inside Expo's own CocoaPods script and predates any
+# configuration here, so automatic triggers only burn minutes. Re-enable the
+# push trigger once the packaging path is settled (likely via EAS Build).
 on:
-  push:
-    branches: [main]
-    paths:
-      - "mobile/**"
-      - ".github/workflows/ios-ipa.yml"
-  pull_request:
-    paths:
-      - "mobile/**"
   workflow_dispatch:
     inputs:
       supabase_url:
