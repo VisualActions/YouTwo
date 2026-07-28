@@ -101,8 +101,7 @@ jobs:
             if xcodebuild -resolvePackageDependencies \
                  -workspace "${{ steps.xc.outputs.workspace }}" \
                  -scheme "${{ steps.xc.outputs.scheme }}" \
-                 -clonedSourcePackagesDirPath spm-cache \
-                 -disableAutomaticPackageResolution NO; then
+                 -clonedSourcePackagesDirPath spm-cache; then
               echo "resolved"
               exit 0
             fi
